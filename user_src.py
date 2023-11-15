@@ -114,6 +114,10 @@ def inference(model, model_inputs) -> dict:
 
     init_image = Image.open(requests.get(image_url, stream=True).raw)
 
+    # Convert "RGBA" images to "RGB"
+    if init_image.mode == "RGBA":
+        init_image = init_image.convert("RGB")
+
 #   output_image = pipe(prompt=prompt, image=init_image).images[0]
 #   output_images = model(prompt=prompt, image=init_image, num_images_per_prompt=4)
 
